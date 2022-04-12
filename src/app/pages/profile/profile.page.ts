@@ -133,5 +133,5 @@ export class ProfilePage implements OnInit {
 
     return await modal.present();
   }
-  public image: any = "../../../assets/image/Ellipse 14.png";
+  public image: any = "../../../assets/Profile/user.svg";
 }

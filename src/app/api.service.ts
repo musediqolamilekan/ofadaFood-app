@@ -1,40 +1,40 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ApiService {
-  public BASE_URL = "http://192.168.0.148/laravel/Laundering/public/api/";
-  id:any;
-  service_name:any;
-  deviceToken:any;
-  date:any;
+  public BASE_URL = "https://api.ofadakitchen.com/public/api/";
+  id: any;
+  service_name: any;
+  deviceToken: any;
+  date: any;
   total: any;
   qty: any;
-  latt:number;
-  long:number;
-  constructor(private http:HttpClient) { }
+  latt: number;
+  long: number;
+  constructor(private http: HttpClient) {}
 
-  getData(url){
+  getData(url) {
     return this.http.get(this.BASE_URL + url);
   }
 
-  postData(url,data){
-    return this.http.post(this.BASE_URL + url , data)
+  postData(url, data) {
+    return this.http.post(this.BASE_URL + url, data);
   }
 
-  getDataWithToken(url){
+  getDataWithToken(url) {
     let headers = new HttpHeaders({
       Authorization: "Bearer " + localStorage.getItem("token"),
     });
-    return this.http.get(this.BASE_URL + url, {headers:headers});
+    return this.http.get(this.BASE_URL + url, { headers: headers });
   }
 
-  postDataWithToken(url, data){
+  postDataWithToken(url, data) {
     let headers = new HttpHeaders({
       Authorization: "Bearer " + localStorage.getItem("token"),
     });
-    return this.http.post(this.BASE_URL + url , data, {headers:headers})
+    return this.http.post(this.BASE_URL + url, data, { headers: headers });
   }
 }

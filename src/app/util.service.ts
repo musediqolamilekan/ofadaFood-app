@@ -1,21 +1,29 @@
-import { Injectable } from '@angular/core';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import {
+  LoadingController,
+  NavController,
+  ToastController,
+} from "@ionic/angular";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UtilService {
   isLoading: boolean;
 
-  constructor(private toastController:ToastController,public navCtrl:NavController,private loadingController:LoadingController) { }
+  constructor(
+    private toastController: ToastController,
+    public navCtrl: NavController,
+    private loadingController: LoadingController
+  ) {}
 
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 3000,
-      mode:'ios',
-      cssClass:"my-toast",
+      duration: 1000,
+      mode: "ios",
+      cssClass: "my-toast",
     });
     toast.present();
   }
@@ -23,10 +31,10 @@ export class UtilService {
   async startLoad() {
     this.isLoading = true;
     return await this.loadingController
-    .create({
-      duration: 5000,
-      cssClass: "custom-loader",
-      message: `<div class="sk-chase">
+      .create({
+        duration: 1500,
+        cssClass: "custom-loader",
+        message: `<div class="sk-chase">
       <div class="sk-chase-dot"></div>
       <div class="sk-chase-dot"></div>
       <div class="sk-chase-dot"></div>
@@ -34,8 +42,8 @@ export class UtilService {
       <div class="sk-chase-dot"></div>
       <div class="sk-chase-dot"></div>
     </div>`,
-    spinner: null,
-  })
+        spinner: null,
+      })
       .then((a) => {
         a.present().then(() => {
           if (!this.isLoading) {
@@ -43,12 +51,12 @@ export class UtilService {
           }
         });
       });
-    }
-    async dismissLoader() {
-      this.isLoading = false;
-      return await this.loadingController.dismiss();
-    }
-    
+  }
+  async dismissLoader() {
+    this.isLoading = false;
+    return await this.loadingController.dismiss();
+  }
+
   newLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   setNewLogin(val) {
     this.newLogin.next(val);
@@ -60,11 +68,11 @@ export class UtilService {
 
   editProfile: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  setNewprofile(val){
+  setNewprofile(val) {
     this.editProfile.next(val);
   }
 
-  isnewProfile(){
+  isnewProfile() {
     return this.editProfile.asObservable();
   }
 }
