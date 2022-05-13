@@ -2,7 +2,6 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button mode="md" defaultHref="/tabs/home" text="">
-
             </ion-back-button>
         </ion-buttons>
         <ion-title mode="md">Order Details</ion-title>
@@ -10,10 +9,27 @@
 </ion-header>
 
 <ion-content>
-    <p class="order ion-padding-start ion-padding-end" *ngIf="data?.order_status == 'Pending'">Pending</p>
-    <p class="order ion-padding-start ion-padding-end" *ngIf="data?.order_status == 'Completed'">Completed</p>
-    <p class="orders ion-padding-start ion-padding-end" *ngIf="data?.order_status == 'Cancel'">Canceled</p>
-    <h1 class="ion-padding-start ion-padding-end">Order ID : {{data?.order_id}}</h1>
+    <p
+        class="order ion-padding-start ion-padding-end"
+        *ngIf="data?.order_status == 'Pending'"
+    >
+        Pending
+    </p>
+    <p
+        class="order ion-padding-start ion-padding-end"
+        *ngIf="data?.order_status == 'Completed'"
+    >
+        Completed
+    </p>
+    <p
+        class="orders ion-padding-start ion-padding-end"
+        *ngIf="data?.order_status == 'Cancel'"
+    >
+        Canceled
+    </p>
+    <h1 class="ion-padding-start ion-padding-end">
+        Order ID : {{data?.order_id}}
+    </h1>
     <p class="label ion-padding-start ion-padding-end">Details</p>
 
     <div class="deails_div">
@@ -21,7 +37,9 @@
         <img class="img" src="../../../assets/item/Path 3516.png" />
         <p>
             Address:
-            <span class="ion-float-right address">{{data?.address?.addr1}}</span>
+            <span class="ion-float-right address"
+                >{{data?.address?.addr1}}</span
+            >
         </p>
         <img class="img" src="../../../assets/item/Path 3516.png" />
         <p class="ion-margin-top delivery">
@@ -29,34 +47,57 @@
         </p>
     </div>
 
-    <p class="label ion-margin-top ion-padding-top ion-padding-start ion-padding-end">
+    <p
+        class="label ion-margin-top ion-padding-top ion-padding-start ion-padding-end"
+    >
         Total Items
     </p>
 
     <div class="deails_div">
         <p class="item">
-            Your total item is <span class="ion-float-right">{{data?.child?.length}}</span>
+            Your total item is
+            <span class="ion-float-right">{{data?.child?.length}}</span>
         </p>
     </div>
 
-    <p class="ion-margin-top ion-padding-top label ion-padding-start ion-padding-end">
+    <p
+        class="ion-margin-top ion-padding-top label ion-padding-start ion-padding-end"
+    >
         Included Items
     </p>
     <div class="deails_div">
-
         <ion-label class="item" *ngFor="let item of data?.child">
             {{item?.name}}
             <h4 *ngFor="let items of item?.service">
-                {{items?.serviceName}} X ({{items?.qty}}) <span class="ion-float-right">{{currency}}{{items?.price}}</span>
+                {{items?.serviceName}} X ({{items?.qty}})
+                <span class="ion-float-right"
+                    >{{currency}}{{items?.price}}</span
+                >
             </h4>
         </ion-label>
 
         <div class="coupon_div" *ngIf="data?.discount != 0">
-            <p class="item">Applied Coupon{{data?.coupon?.discount}}<span *ngIf="data?.coupon?.type == 'Percentage'">%</span><span *ngIf="data?.coupon?.type == 'Amount'">{{currency}}</span><span class="red ion-float-right">-{{currency}}{{data?.discount}}</span></p>
+            <p class="item">
+                Applied Coupon{{data?.coupon?.discount}}<span
+                    *ngIf="data?.coupon?.type == 'Percentage'"
+                    >%</span
+                ><span *ngIf="data?.coupon?.type == 'Amount'">{{currency}}</span
+                ><span class="red ion-float-right"
+                    >-{{currency}}{{data?.discount}}</span
+                >
+            </p>
             <p class="code">{{data?.coupon?.code}}</p>
         </div>
         <p class="item-text">
-            Sub Total <span class="ion-float-right">{{currency}}{{data?.payment}}</span>
+            Sub Total
+            <span class="ion-float-right">{{currency}}{{data?.payment}}</span>
         </p>
+        <ion-button
+            (click)="makePay()"
+            slot="end"
+            mode="md"
+            color="var(--blue-color)"
+            >Re-Order</ion-button
+        >
     </div>
 </ion-content>

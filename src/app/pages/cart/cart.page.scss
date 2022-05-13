@@ -10,9 +10,15 @@ ion-header {
 }
 
 ion-content {
+    .full-width {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 5;
+    }
     .header-section {
         ion-textarea {
-            background-color: #F9F9F9;
+            background-color: #f9f9f9;
             font-size: 15px;
             border-radius: 8px;
             font-family: proxi-regular;
@@ -20,7 +26,7 @@ ion-content {
             --padding-top: 12px;
         }
         .future {
-            color: #4AB237;
+            color: #4ab237;
             font-size: 13px;
             font-family: proxi-regular;
             padding-left: 10px;
@@ -71,7 +77,7 @@ ion-content {
         }
     }
     .cart-data {
-        background-color: #F9F9F9;
+        background-color: #f9f9f9;
         padding-top: 15px;
         padding-bottom: 15px;
         padding-left: 15px;
@@ -131,6 +137,17 @@ ion-footer {
             color: var(--blue-color);
             margin-left: 6px;
         }
+    }
+    .full-width {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 5;
+    }
+    .cart-buttons {
+        width: max-content;
+        display: flex;
+        flex-direction: column;
     }
     ion-button {
         height: 38px;
