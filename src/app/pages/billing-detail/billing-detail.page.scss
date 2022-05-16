@@ -117,8 +117,10 @@ ion-content {
             text-transform: capitalize;
             width: 116px;
             overflow: hidden;
-            border-radius: 38px;
-            margin-top: 6px;
+            // border-radius: 38px;
+            border-radius: 15px;
+            margin-left: 13px;
+            margin-top: 10px;
         }
         ion-item {
             --background: transparent;

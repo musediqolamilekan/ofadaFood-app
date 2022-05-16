@@ -108,6 +108,7 @@
             <img *ngIf="p.img" src="{{p.img}}" alt="No Image Found" />
             <p>{{p.name}}</p>
             <ion-checkbox
+                disabled="completed"
                 slot="end"
                 [checked]="p.checked"
                 mode="ios"

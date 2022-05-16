@@ -185,11 +185,11 @@ export class HomePage {
     ionViewWillEnter() {
         this.cartData = JSON.parse(localStorage.getItem("cart-data"));
         this.util.startLoad();
-        localStorage.removeItem("address-id");
+        // localStorage.removeItem("address-id");
         localStorage.removeItem("date");
         // localStorage.removeItem("totalAmount");
         // localStorage.removeItem("orders");
-        localStorage.removeItem("SelectAddress");
+        // localStorage.removeItem("SelectAddress");
         localStorage.removeItem("coupon-id");
         localStorage.removeItem("discount_");
         localStorage.removeItem("discount_type");

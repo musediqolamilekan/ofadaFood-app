@@ -51,7 +51,9 @@ export class CartPage implements OnInit {
 
     setOrder() {
         const allCart = JSON.parse(localStorage.getItem("cart-data"));
-        if (allCart[0] != null) {
+        if (!allCart) {
+            this.util.presentToast("Please add items to cart");
+        } else {
             const prevTotal = localStorage.getItem("totalAmount")
                 ? JSON.parse(localStorage.getItem("totalAmount"))
                 : 0;
@@ -65,7 +67,7 @@ export class CartPage implements OnInit {
     }
 
     makePay() {
-        const allCurrOrders = JSON.parse(localStorage.getItem("orders"));
+        const allCurrOrders = JSON.parse(localStorage.getItem("orders")) || [];
         const allCart = JSON.parse(localStorage.getItem("cart-data"));
         this.totalBill = JSON.parse(localStorage.getItem("totalAmount"));
         if (this.totalBill == 0) {
@@ -73,10 +75,18 @@ export class CartPage implements OnInit {
             this.util.presentToast("Address are Required");
         } else if (!this.date) {
             this.util.presentToast("Delevery date is Required");
-        } else if (!allCurrOrders) {
-            localStorage.setItem("orders", JSON.stringify([allCart]));
+        } else if (!allCurrOrders && !allCart) {
+            this.util.presentToast(
+                "Please add items to cart before you order!"
+            );
+        } else if (allCart) {
+            const allOrders = [...allCurrOrders, allCart];
+            localStorage.setItem("orders", JSON.stringify(allOrders));
             localStorage.removeItem("cart-data");
-            localStorage.setItem("totalAmount", this.api.total);
+            const prevTotal = localStorage.getItem("totalAmount")
+                ? JSON.parse(localStorage.getItem("totalAmount"))
+                : 0;
+            localStorage.setItem("totalAmount", this.api.total + prevTotal);
             this.util.navCtrl.navigateForward("tabs/home/make-payment");
         } else {
             this.util.navCtrl.navigateForward("tabs/home/make-payment");

@@ -31,14 +31,13 @@ export class BillingDetailPage implements OnInit {
     ) {}
 
     makePay() {
-        this.util.navCtrl.navigateForward("tabs/home/make-payment");
-    }
-
-    ngOnInit() {
         localStorage.getItem("date")
             ? (this.currency = localStorage.getItem("currency_symbol"))
             : this.util.navCtrl.navigateForward("tabs/home/cart");
+        this.util.navCtrl.navigateForward("tabs/home/make-payment");
     }
+
+    ngOnInit() {}
     ionViewWillEnter() {
         this.util.startLoad();
         this.id = localStorage.getItem("order-id");
@@ -46,8 +45,13 @@ export class BillingDetailPage implements OnInit {
             (success: any) => {
                 if (success.success) {
                     const updated = success.data.child.map((a) => {
-                        a.service[0].total = a.service[0].price;
-                        a.service[0].type = a.service[0].serviceName;
+                        a.id = a.product_id;
+                        a.service = a.service.map((a) => {
+                            a.single_service_id = a.service_id;
+                            a.total = a.price;
+                            a.type = a.serviceName;
+                            return a;
+                        });
                         return a;
                     });
                     localStorage.setItem("orders", JSON.stringify([updated]));
@@ -55,6 +59,7 @@ export class BillingDetailPage implements OnInit {
                         "totalAmount",
                         JSON.stringify(success.data.payment)
                     );
+                    localStorage.setItem("address-id", success.data.addr_id);
                     this.data = success.data;
                     this.date = success.data.date;
                     this.payment = success.data.payment;

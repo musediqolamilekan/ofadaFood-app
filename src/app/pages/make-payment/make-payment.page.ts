@@ -65,10 +65,10 @@ export class MakePaymentPage implements OnInit {
             (success: any) => {
                 if (success.success) {
                     this.util.navCtrl.navigateRoot("payment-done");
-                    localStorage.removeItem("address-id");
+                    // localStorage.removeItem("address-id");
                     localStorage.removeItem("date");
                     localStorage.removeItem("totalAmount");
-                    localStorage.removeItem("SelectAddress");
+                    // localStorage.removeItem("SelectAddress");
                     localStorage.removeItem("orders");
                     localStorage.removeItem("discount_type");
                     this.util.dismissLoader();
@@ -359,11 +359,11 @@ export class MakePaymentPage implements OnInit {
             (success: any) => {
                 if (success.success) {
                     this.util.navCtrl.navigateRoot("payment-done");
-                    localStorage.removeItem("address-id");
+                    // localStorage.removeItem("address-id");
                     localStorage.removeItem("date");
                     localStorage.removeItem("totalAmount");
-                    localStorage.removeItem("SelectAddress");
-                    localStorage.removeItem("cart-data");
+                    // localStorage.removeItem("SelectAddress");
+                    localStorage.removeItem("orders");
                     localStorage.removeItem("discount_type");
                     this.util.dismissLoader();
                 }
@@ -391,11 +391,11 @@ export class MakePaymentPage implements OnInit {
             (success: any) => {
                 if (success.success) {
                     this.util.navCtrl.navigateRoot("payment-done");
-                    localStorage.removeItem("address-id");
+                    // localStorage.removeItem("address-id");
                     localStorage.removeItem("date");
                     localStorage.removeItem("totalAmount");
-                    localStorage.removeItem("SelectAddress");
-                    localStorage.removeItem("cart-data");
+                    // localStorage.removeItem("SelectAddress");
+                    localStorage.removeItem("orders");
                     localStorage.removeItem("discount_type");
                     this.util.dismissLoader();
                 }
@@ -423,11 +423,11 @@ export class MakePaymentPage implements OnInit {
             (success: any) => {
                 if (success.success) {
                     this.util.navCtrl.navigateRoot("payment-done");
-                    localStorage.removeItem("address-id");
+                    // localStorage.removeItem("address-id");
                     localStorage.removeItem("date");
                     localStorage.removeItem("totalAmount");
-                    localStorage.removeItem("SelectAddress");
-                    localStorage.removeItem("cart-data");
+                    // localStorage.removeItem("SelectAddress");
+                    localStorage.removeItem("orders");
                     localStorage.removeItem("discount_type");
                     this.util.dismissLoader();
                 }
@@ -454,11 +454,11 @@ export class MakePaymentPage implements OnInit {
             (success: any) => {
                 if (success.success) {
                     this.util.navCtrl.navigateRoot("payment-done");
-                    localStorage.removeItem("address-id");
+                    // localStorage.removeItem("address-id");
                     localStorage.removeItem("date");
                     localStorage.removeItem("totalAmount");
-                    localStorage.removeItem("SelectAddress");
-                    localStorage.removeItem("cart-data");
+                    // localStorage.removeItem("SelectAddress");
+                    localStorage.removeItem("orders");
                     localStorage.removeItem("discount_type");
                     this.util.dismissLoader();
                 }
