@@ -11,9 +11,11 @@ declare var RazorpayCheckout: any;
     styleUrls: ["./make-payment.page.scss"],
 })
 export class MakePaymentPage implements OnInit {
+    PS = `${localStorage.getItem("totalAmount")}00`;
+    email = localStorage.getItem("email");
     options: PaystackOptions = {
-        amount: 50000,
-        email: "gbolahanbamigbola2000@mail.com",
+        amount: Number(this.PS),
+        email: this.email,
         ref: `${Math.ceil(Math.random() * 10e10)}`,
     };
     profile: any;
@@ -114,7 +116,6 @@ export class MakePaymentPage implements OnInit {
         this.date = localStorage.getItem("date");
         this.totalItems = JSON.parse(localStorage.getItem("orders"));
         this.totalPayment = localStorage.getItem("totalAmount");
-
         this.totalItems.forEach((a) =>
             a.forEach((element) => {
                 this.qty += element.qty;

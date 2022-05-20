@@ -108,6 +108,12 @@ export class CartPage implements OnInit {
     service: any = [];
     tot = 0;
     ionViewWillEnter() {
+        this.api.getDataWithToken("profile").subscribe((success: any) => {
+            if (success.success) {
+                localStorage.setItem("email", success.data.email);
+            }
+        });
+
         this.cartDataDisplay = JSON.parse(localStorage.getItem("cart-data"))
             ? JSON.parse(localStorage.getItem("cart-data"))
             : [];

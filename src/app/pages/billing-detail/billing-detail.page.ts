@@ -60,6 +60,7 @@ export class BillingDetailPage implements OnInit {
                         JSON.stringify(success.data.payment)
                     );
                     localStorage.setItem("address-id", success.data.addr_id);
+                    localStorage.setItem("email", success.data.user.email);
                     this.data = success.data;
                     this.date = success.data.date;
                     this.payment = success.data.payment;

@@ -33,6 +33,7 @@
     "angular4-paystack": "^3.0.2",
     "com.razorpay.cordova": "1.4.12",
     "cordova-android": "9.0.0",
+    "cordova-res": "^0.15.4",
     "ion-bottom-drawer": "^2.0.0",
     "ion2-calendar": "^3.0.0-rc.0",
     "moment": "^2.28.0",
@@ -75,7 +76,9 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.5"
+    "typescript": "~3.9.5",
+    "@types/react": "~17.0.21",
+    "@types/react-native": "~0.67.6"
   },
   "description": "An Ionic project",
   "cordova": {
