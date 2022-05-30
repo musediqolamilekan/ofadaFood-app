@@ -32,7 +32,6 @@
     "@ng-select/ng-select": "^5.0.3",
     "angular4-paystack": "^3.0.2",
     "com.razorpay.cordova": "1.4.12",
-    "cordova-android": "9.0.0",
     "cordova-res": "^0.15.4",
     "ion-bottom-drawer": "^2.0.0",
     "ion2-calendar": "^3.0.0-rc.0",
@@ -52,10 +51,15 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "@types/react": "~17.0.21",
+    "@types/react-native": "~0.67.6",
     "card.io.cordova.mobilesdk": "^2.1.0",
     "codelyzer": "^6.0.0",
     "com.paypal.cordova.mobilesdk": "^3.5.0",
+    "cordova-android": "^10.1.2",
     "cordova-plugin-android-permissions": "^1.1.0",
+    "cordova-plugin-androidx": "^3.0.0",
+    "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "^4.0.2",
@@ -64,7 +68,6 @@
     "cordova-plugin-request-location-accuracy": "^2.3.0",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
-    "cordova-plugin-whitelist": "^1.3.3",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
@@ -76,9 +79,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.5",
-    "@types/react": "~17.0.21",
-    "@types/react-native": "~0.67.6"
+    "typescript": "~3.9.5"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -86,7 +87,6 @@
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
@@ -101,7 +101,9 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-request-location-accuracy": {
         "PLAY_SERVICES_LOCATION_VERSION": "16.+"
-      }
+      },
+      "cordova-plugin-androidx": {},
+      "cordova-plugin-androidx-adapter": {}
     },
     "platforms": [
       "android"

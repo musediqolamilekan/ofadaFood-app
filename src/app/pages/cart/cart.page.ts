@@ -47,6 +47,7 @@ export class CartPage implements OnInit {
         localStorage.removeItem("orders");
         localStorage.removeItem("cart-data");
         this.util.dismissLoader();
+        this.util.presentToast("Orders and Cart items Cleared!");
     }
 
     setOrder() {
@@ -63,6 +64,7 @@ export class CartPage implements OnInit {
                 : [allCart];
             localStorage.setItem("orders", JSON.stringify(allCurrOrders));
             localStorage.removeItem("cart-data");
+            this.util.presentToast("Order registered successfully");
         }
     }
 

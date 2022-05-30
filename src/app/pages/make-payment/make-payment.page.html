@@ -71,6 +71,18 @@
             Sub Total
             <span class="ion-float-right">{{currency_}}{{totalPayment}}</span>
         </p>
+        <p class="item-text">
+            Service Charge
+            <span class="ion-float-right">{{currency_}}{{serviceCharge}}</span>
+        </p>
+        <p class="item-text">
+            VAT
+            <span class="ion-float-right">{{currency_}}{{VAT.toFixed(2)}}</span>
+        </p>
+        <p class="item-text">
+            Total
+            <span class="ion-float-right">{{currency_}}{{finalTotal}}</span>
+        </p>
     </div>
 
     <p

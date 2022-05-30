@@ -1,0 +1,18 @@
+keytool -genkey -v -keystore ofadaapp-key.keystore -alias ofadaapp-key -keyalg RSA -keysize 2048 -validity 10000
+ofadaapp-key.keystore
+ofadaapp-key
+ofada123 - password
+
+gbolahan bamigbola
+
+Mobile Development
+
+7th Tower Technologies  
+
+Ilorin
+
+Kwara State
+
+NG
+
+CN=gbolahan bamigbola, OU=Mobile Development, O=7th Tower Technologies, L=Ilorin, ST=Kwara State, C=NG

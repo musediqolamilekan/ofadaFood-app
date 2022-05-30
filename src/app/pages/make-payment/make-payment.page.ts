@@ -12,9 +12,11 @@ declare var RazorpayCheckout: any;
 })
 export class MakePaymentPage implements OnInit {
     PS = `${localStorage.getItem("totalAmount")}00`;
+    sc = Number(this.PS) * 0.05;
+    v = this.sc * 0.075;
     email = localStorage.getItem("email");
     options: PaystackOptions = {
-        amount: Number(this.PS),
+        amount: Number(this.PS) + this.sc + this.v,
         email: this.email,
         ref: `${Math.ceil(Math.random() * 10e10)}`,
     };
@@ -23,6 +25,9 @@ export class MakePaymentPage implements OnInit {
     date: string;
     totalItems: any = [];
     totalPayment: any;
+    finalTotal: any;
+    VAT: any;
+    serviceCharge: any;
     qty = 0;
     couponType: any;
     discount = 0;
@@ -50,42 +55,90 @@ export class MakePaymentPage implements OnInit {
         console.log(this.title, ref);
         this.util.startLoad();
         this.isBtn = true;
-        const allProducts = this.totalItems.reduce((acc, product) => {
-            acc.push(...product);
-            return acc;
-        }, []);
-        let data = {
-            addr_id: localStorage.getItem("address-id"),
-            date: this.date,
-            payment: this.totalPayment,
-            payment_type: "paystack",
-            products: allProducts,
-            coupon_id: localStorage.getItem("coupon-id"),
-            discount: this.disPay,
-        };
-        this.api.postDataWithToken("order", data).subscribe(
-            (success: any) => {
-                if (success.success) {
-                    this.util.navCtrl.navigateRoot("payment-done");
-                    // localStorage.removeItem("address-id");
-                    localStorage.removeItem("date");
-                    localStorage.removeItem("totalAmount");
-                    // localStorage.removeItem("SelectAddress");
-                    localStorage.removeItem("orders");
-                    localStorage.removeItem("discount_type");
+        // const allProducts = this.totalItems.reduce((acc, product) => {
+        //     acc.push(...product);
+        //     return acc;
+        // }, []);
+        this.totalItems.map((order, i) => {
+            let singleOrderPrice = 0;
+            order.forEach((item) => {
+                item.service.forEach((s) => (singleOrderPrice += s.total));
+            });
+            let data = {
+                addr_id: localStorage.getItem("address-id"),
+                date: this.date,
+                payment: singleOrderPrice,
+                payment_type: "paystack",
+                products: order,
+                coupon_id: localStorage.getItem("coupon-id"),
+                discount: this.disPay,
+            };
+            this.api.postDataWithToken("order", data).subscribe(
+                (success: any) => {
+                    if (success.success && i >= this.totalItems.length - 1) {
+                        this.util.navCtrl.navigateRoot("payment-done");
+                        // localStorage.removeItem("address-id");
+                        localStorage.removeItem("date");
+                        localStorage.removeItem("totalAmount");
+                        // localStorage.removeItem("SelectAddress");
+                        localStorage.removeItem("orders");
+                        localStorage.removeItem("discount_type");
+                        this.util.dismissLoader();
+                    }
+                },
+                (err) => {
                     this.util.dismissLoader();
                 }
-            },
-            (err) => {
-                this.util.dismissLoader();
-            }
-        );
+            );
+        });
+
+        // let data = {
+        //     addr_id: localStorage.getItem("address-id"),
+        //     date: this.date,
+        //     payment: this.totalPayment,
+        //     payment_type: "paystack",
+        //     products: allProducts,
+        //     coupon_id: localStorage.getItem("coupon-id"),
+        //     discount: this.disPay,
+        // };
+        // this.api.postDataWithToken("order", data).subscribe(
+        //     (success: any) => {
+        //         if (success.success) {
+        //             this.util.navCtrl.navigateRoot("payment-done");
+        //             // localStorage.removeItem("address-id");
+        //             localStorage.removeItem("date");
+        //             localStorage.removeItem("totalAmount");
+        //             // localStorage.removeItem("SelectAddress");
+        //             localStorage.removeItem("orders");
+        //             localStorage.removeItem("discount_type");
+        //             this.util.dismissLoader();
+        //         }
+        //     },
+        //     (err) => {
+        //         this.util.dismissLoader();
+        //     }
+        // );
     }
 
     paymentCancel() {
         console.log("payment failed");
     }
     ngOnInit() {
+        this.totalPayment = localStorage.getItem("totalAmount");
+        this.serviceCharge = this.totalPayment * 0.05;
+        this.VAT = this.serviceCharge * 0.075;
+        // localStorage.setItem(
+        //     "totalAmount",
+        //     JSON.stringify(
+        //         Number(this.totalPayment) +
+        //             Number(this.serviceCharge) +
+        //             Number(this.VAT)
+        //     )
+        // );
+        this.finalTotal =
+            Number(this.totalPayment) +
+            Number(this.serviceCharge) +
+            Number(this.VAT);
         this.util.startLoad();
         this.currency = localStorage.getItem("currency");
         this.currency_ = localStorage.getItem("currency_symbol");
@@ -115,7 +168,7 @@ export class MakePaymentPage implements OnInit {
         this.address = localStorage.getItem("SelectAddress");
         this.date = localStorage.getItem("date");
         this.totalItems = JSON.parse(localStorage.getItem("orders"));
-        this.totalPayment = localStorage.getItem("totalAmount");
+
         this.totalItems.forEach((a) =>
             a.forEach((element) => {
                 this.qty += element.qty;
@@ -134,6 +187,7 @@ export class MakePaymentPage implements OnInit {
             this.discountTotal();
         }
     }
+    ionViewDidEnter() {}
 
     setupPaypal() {
         if (this.dataTrue) {
