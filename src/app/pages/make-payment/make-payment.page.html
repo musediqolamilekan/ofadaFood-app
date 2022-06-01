@@ -81,7 +81,10 @@
         </p>
         <p class="item-text">
             Total
-            <span class="ion-float-right">{{currency_}}{{finalTotal}}</span>
+            <span class="ion-float-right"
+                >{{currency_}}{{finalTotal.toString().indexOf(".")?
+                finalTotal.toFixed(2): finalTotal }}</span
+            >
         </p>
     </div>
 
