@@ -11,12 +11,13 @@ declare var RazorpayCheckout: any;
     styleUrls: ["./make-payment.page.scss"],
 })
 export class MakePaymentPage implements OnInit {
-    PS = `${localStorage.getItem("totalAmount")}00`;
-    sc = Number(this.PS) * 0.05;
-    v = this.sc * 0.075;
+    getTotal = `${localStorage.getItem("totalAmount")}00`;
+    getCharges = Number(this.getTotal) * 0.05;
+    getVAT = this.getCharges * 0.075;
     email = localStorage.getItem("email");
+    paystackTotal = Number(this.getTotal) + this.getCharges + this.getVAT;
     options: PaystackOptions = {
-        amount: Number(this.PS) + this.sc + this.v,
+        amount: Math.round(this.paystackTotal),
         email: this.email,
         ref: `${Math.ceil(Math.random() * 10e10)}`,
     };
@@ -91,33 +92,6 @@ export class MakePaymentPage implements OnInit {
                 }
             );
         });
-
-        // let data = {
-        //     addr_id: localStorage.getItem("address-id"),
-        //     date: this.date,
-        //     payment: this.totalPayment,
-        //     payment_type: "paystack",
-        //     products: allProducts,
-        //     coupon_id: localStorage.getItem("coupon-id"),
-        //     discount: this.disPay,
-        // };
-        // this.api.postDataWithToken("order", data).subscribe(
-        //     (success: any) => {
-        //         if (success.success) {
-        //             this.util.navCtrl.navigateRoot("payment-done");
-        //             // localStorage.removeItem("address-id");
-        //             localStorage.removeItem("date");
-        //             localStorage.removeItem("totalAmount");
-        //             // localStorage.removeItem("SelectAddress");
-        //             localStorage.removeItem("orders");
-        //             localStorage.removeItem("discount_type");
-        //             this.util.dismissLoader();
-        //         }
-        //     },
-        //     (err) => {
-        //         this.util.dismissLoader();
-        //     }
-        // );
     }
 
     paymentCancel() {
@@ -127,14 +101,6 @@ export class MakePaymentPage implements OnInit {
         this.totalPayment = localStorage.getItem("totalAmount");
         this.serviceCharge = this.totalPayment * 0.05;
         this.VAT = this.serviceCharge * 0.075;
-        // localStorage.setItem(
-        //     "totalAmount",
-        //     JSON.stringify(
-        //         Number(this.totalPayment) +
-        //             Number(this.serviceCharge) +
-        //             Number(this.VAT)
-        //     )
-        // );
         this.finalTotal =
             Number(this.totalPayment) +
             Number(this.serviceCharge) +
@@ -166,7 +132,17 @@ export class MakePaymentPage implements OnInit {
 
     ionViewWillEnter() {
         this.address = localStorage.getItem("SelectAddress");
-        this.date = localStorage.getItem("date");
+        this.date =
+            localStorage.getItem("date") ||
+            `${
+                new Date().getDate() < 10
+                    ? `0${new Date().getDate()}`
+                    : new Date().getDate()
+            }-${
+                new Date().getMonth() + 1 < 10
+                    ? `0${new Date().getMonth() + 1}`
+                    : new Date().getMonth() + 1
+            }-${new Date().getFullYear()}`;
         this.totalItems = JSON.parse(localStorage.getItem("orders"));
 
         this.totalItems.forEach((a) =>

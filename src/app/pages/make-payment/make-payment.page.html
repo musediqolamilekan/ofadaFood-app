@@ -88,33 +88,34 @@
         </p>
     </div>
 
-    <p
-        class="label ion-margin-top ion-padding-top ion-padding-start ion-padding-end"
-    >
-        Select a Payment Method
-    </p>
-
+    <!-- <p class="label ion-margin-start">Satisfied?</p> -->
     <div class="deails_div">
-        <div style="width: 100%">
+        <div class="satisfied">
+            <h3 style="font-size: 16; font-family: proxi-bold">Satisfied?</h3>
             <button
-                style="
-                    margin-left: 40px;
-                    background-color: transparent;
-                    padding: 20px;
-                    font-weight: 500;
-                    font-size: 16px;
-                    color: #333;
-                "
+                class="make-payment"
                 angular4-paystack
                 [paystackOptions]="options"
                 (paymentInit)="paymentInit()"
                 (onClose)="paymentCancel()"
                 (callback)="paymentDone($event)"
             >
-                Pay with Paystack
+                Make Payment
             </button>
         </div>
-        <ion-item
+        <!-- <div style="width: 100%">
+            <button
+                class="make-payment ion-margin-start"
+                angular4-paystack
+                [paystackOptions]="options"
+                (paymentInit)="paymentInit()"
+                (onClose)="paymentCancel()"
+                (callback)="paymentDone($event)"
+            >
+                Make Payment
+            </button>
+        </div> -->
+        <!-- <ion-item
             *ngFor="let p of payment_div"
             (click)="checkboxChange(p)"
             class="ion-no-padding"
@@ -128,7 +129,7 @@
                 [checked]="p.checked"
                 mode="ios"
             ></ion-checkbox>
-        </ion-item>
+        </ion-item> -->
     </div>
 
     <div class="ion-margin-top margin-top">

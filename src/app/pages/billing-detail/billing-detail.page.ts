@@ -31,10 +31,10 @@ export class BillingDetailPage implements OnInit {
     ) {}
 
     makePay() {
-        localStorage.getItem("date")
-            ? (this.currency = localStorage.getItem("currency_symbol"))
-            : this.util.navCtrl.navigateForward("tabs/home/cart");
-        this.util.navCtrl.navigateForward("tabs/home/make-payment");
+        // localStorage.getItem("date")
+        this.currency = localStorage.getItem("currency_symbol");
+        this.util.navCtrl.navigateForward("tabs/home/cart");
+        // this.util.navCtrl.navigateForward("tabs/home/make-payment");
     }
 
     ngOnInit() {}

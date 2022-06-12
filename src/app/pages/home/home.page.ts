@@ -21,8 +21,8 @@ export class HomePage {
 
     cart() {
         this.cartData = JSON.parse(localStorage.getItem("cart-data"));
-
-        if (this.cartData == null) {
+        const allCurrOrders = JSON.parse(localStorage.getItem("orders"));
+        if (this.cartData == null && !allCurrOrders) {
             this.util.presentToast("Cart is Empty");
         } else {
             this.util.navCtrl.navigateForward("tabs/home/cart");
@@ -246,9 +246,9 @@ export class HomePage {
             ? JSON.parse(localStorage.getItem("servicesId"))
             : [];
         this.servicesId.push(id);
+        localStorage.setItem("product-id", id.id);
         this.api.id = id.id;
         this.api.service_name = id.name;
         this.util.navCtrl.navigateForward(["product-view"], navigationExtra);
-        localStorage.setItem("product-id", id.id);
     }
 }
