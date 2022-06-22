@@ -8,7 +8,7 @@ ion-header {
         }
         ion-button {
             font-size: 13px;
-            --color: #FF4343 !important;
+            --color: #ff4343 !important;
             text-transform: capitalize;
             font-family: proxi-regular;
             --background: transparent;
@@ -17,7 +17,7 @@ ion-header {
 }
 
 ion-label {
-    font-family: 'proxi-regular';
+    font-family: "proxi-regular";
     font-weight: bold;
     h4 {
         font-size: 14px;
@@ -35,7 +35,7 @@ ion-content {
     .order {
         font-size: 15px;
         font-family: proxi-regular;
-        color: #2CA558;
+        color: #2ca558;
         text-transform: uppercase;
     }
     .orders {
@@ -55,7 +55,7 @@ ion-content {
     }
     .label {
         font-size: 15px;
-        font-family: 'proxi-bold';
+        font-family: "proxi-bold";
     }
     .deails_div {
         padding-top: 8px;
@@ -109,6 +109,19 @@ ion-content {
                 color: var(--blue-color);
             }
         }
+        ion-button {
+            height: 38px;
+            background-color: var(--blue-color);
+            font-size: 13px;
+            font-family: proxi-regular;
+            text-transform: capitalize;
+            width: 116px;
+            overflow: hidden;
+            // border-radius: 38px;
+            border-radius: 15px;
+            margin-left: 13px;
+            margin-top: 10px;
+        }
         ion-item {
             --background: transparent;
             --inner-padding-end: 0px;
@@ -120,7 +133,7 @@ ion-content {
                 margin-left: 13px;
             }
             ion-checkbox {
-                --background: #F1F1F1;
+                --background: #f1f1f1;
                 --border-color: #f9f9f9;
                 --size: 26px;
                 --background-checked: var(--blue-color);

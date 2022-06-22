@@ -29,13 +29,20 @@ ion-content {
     }
     .label {
         font-size: 15px;
-        font-family: 'proxi-bold';
+        font-family: "proxi-bold";
     }
     .deails_div {
-        padding-top: 8px;
-        padding-bottom: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         background-color: #f9f9f9;
+        margin-top: 10px;
         margin-bottom: 10px;
+        .satisfied {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100;
+        }
         p {
             padding-left: 14px;
             padding-right: 14px;
@@ -57,10 +64,10 @@ ion-content {
             padding-right: 14px;
             margin-bottom: 33px;
             font-size: 19px;
-            font-family: 'proxi-bold';
+            font-family: "proxi-bold";
             ion-text {
                 font-size: 15px;
-                font-family: 'proxi-regular';
+                font-family: "proxi-regular";
                 color: darkgray;
             }
             span {
@@ -71,7 +78,7 @@ ion-content {
         }
         .coupon_div {
             height: 52px;
-            background-color: #DFEFFF;
+            background-color: #dfefff;
             padding-top: 7px;
             .sub_div {
                 height: 40px;
@@ -104,7 +111,7 @@ ion-content {
                 margin-left: 13px;
             }
             ion-checkbox {
-                --background: #F1F1F1;
+                --background: #f1f1f1;
                 --border-color: #f9f9f9;
                 --size: 26px;
                 --background-checked: var(--blue-color);
@@ -133,5 +140,17 @@ ion-content {
     .margin-top {
         margin-top: 35px;
         margin-bottom: 47px;
+    }
+    .make-payment {
+        height: 38px;
+        color: #fff;
+        background-color: var(--blue-color);
+        font-size: 13px;
+        font-family: proxi-regular;
+        text-transform: capitalize;
+        width: 116px;
+        height: 40px;
+        overflow: hidden;
+        border-radius: 38px;
     }
 }

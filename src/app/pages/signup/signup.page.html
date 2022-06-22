@@ -4,10 +4,18 @@
             <div class="ion-margin-top">
                 <ion-item class="ion-no-padding" lines="none">
                     <ion-buttons>
-                        <ion-back-button mode="md" defaultHref="login" text="" icon="arrow-back-outline"></ion-back-button>
+                        <ion-back-button
+                            mode="md"
+                            defaultHref="login"
+                            text=""
+                            icon="arrow-back-outline"
+                        ></ion-back-button>
                     </ion-buttons>
                     <ion-label class="title">
-                        <p>Signup <span class="ion-float-right">Ofada Food</span></p>
+                        <p>
+                            Signup
+                            <span class="ion-float-right">Ofada Food</span>
+                        </p>
                         <div class="hr"></div>
                     </ion-label>
                 </ion-item>
@@ -15,54 +23,117 @@
             <div class="padding-top">
                 <div class="input-div">
                     <ion-label>Full Name</ion-label>
-                    <ion-input [(ngModel)]="name" placeholder="Enter your full name"></ion-input>
-                    <p class="err" *ngIf="this.name.length == 0">{{errr?.name[0]}}</p>
+                    <ion-input
+                        [(ngModel)]="name"
+                        placeholder="Enter your full name"
+                    ></ion-input>
+                    <p class="err" *ngIf="this.name.length == 0">
+                        {{errr?.name[0]}}
+                    </p>
                 </div>
                 <div class="input-div">
                     <ion-label>Email Address</ion-label>
-                    <ion-input [(ngModel)]="email" type="email" placeholder="Enter your email ID" required></ion-input>
+                    <ion-input
+                        [(ngModel)]="email"
+                        type="email"
+                        placeholder="Enter your email ID"
+                        required
+                    ></ion-input>
                     <p class="err">{{errr?.email[0]}}</p>
                 </div>
                 <div class="input-div">
                     <ion-label>Password</ion-label>
-                    <ion-input [(ngModel)]="password" placeholder="Enter your password"></ion-input>
-                    <p class="err" *ngIf="this.password.length == 0">{{errr?.password[0]}}</p>
+                    <ion-input
+                        type="password"
+                        [(ngModel)]="password"
+                        placeholder="Enter your password"
+                    ></ion-input>
+                    <p class="err" *ngIf="this.password.length == 0">
+                        {{errr?.password[0]}}
+                    </p>
                 </div>
                 <div class="input-div ion-margin-bottom">
                     <ion-label>Confirm Password</ion-label>
-                    <ion-input [(ngModel)]="confirm_password" placeholder="Re-Enter password"></ion-input>
-                    <p class="err" *ngIf="this.confirm_password.length == 0">{{errr?.confirm_password[0]}}</p>
+                    <ion-input
+                        type="password"
+                        [(ngModel)]="confirm_password"
+                        placeholder="Re-Enter password"
+                    ></ion-input>
+                    <p class="err" *ngIf="this.confirm_password.length == 0">
+                        {{errr?.confirm_password[0]}}
+                    </p>
                 </div>
                 <div>
                     <ion-label class="number">Enter Your Number</ion-label>
                 </div>
                 <div class="number-input">
                     <div class="code-div">
-                        <ng-select class="country-codeSelect" [clearable]="false" [(ngModel)]="code" [items]="cCode" bindLabel="dial_code" bindValue="dial_code">
+                        <ng-select
+                            class="country-codeSelect"
+                            [clearable]="false"
+                            [(ngModel)]="code"
+                            [items]="cCode"
+                            bindLabel="dial_code"
+                            bindValue="dial_code"
+                        >
                             <ng-template ng-label-tmp let-item="item">
-                                <img height="16" width="21" src="{{'https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/' + (item.code | lowercase) + '.png'}}" style="margin-right: 8px;margin-bottom: -2px" />
+                                <img
+                                    height="16"
+                                    width="21"
+                                    src="{{'https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/' + (item.code | lowercase) + '.png'}}"
+                                    style="
+                                        margin-right: 8px;
+                                        margin-bottom: -2px;
+                                    "
+                                />
                                 <span>{{item.dial_code}}</span>
                             </ng-template>
-                            <ng-template ng-option-tmp let-item="item" let-index="index">
-                                <img height="16" width="21" src="{{'https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/' + (item.code | lowercase) + '.png'}}" style="margin-right: 8px;margin-bottom: -2px" />
+                            <ng-template
+                                ng-option-tmp
+                                let-item="item"
+                                let-index="index"
+                            >
+                                <img
+                                    height="16"
+                                    width="21"
+                                    src="{{'https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/' + (item.code | lowercase) + '.png'}}"
+                                    style="
+                                        margin-right: 8px;
+                                        margin-bottom: -2px;
+                                    "
+                                />
                                 <span>{{item.dial_code}}</span>
                             </ng-template>
                         </ng-select>
                     </div>
                     <div class="number-div">
                         <div class="input-div">
-                            <ion-input [(ngModel)]="phone" type="tel" placeholder="00000000"></ion-input>
+                            <ion-input
+                                [(ngModel)]="phone"
+                                type="tel"
+                                placeholder="00000000"
+                            ></ion-input>
                         </div>
                     </div>
                 </div>
-                <p class="err" *ngIf="this.phone.length == 0">{{errr?.phone[0]}}</p>
+                <p class="err" *ngIf="this.phone.length == 0">
+                    {{errr?.phone[0]}}
+                </p>
                 <div class="ion-margin-top">
-                    <ion-button mode="md" color="var(--blue-color)" (click)="signUp()" expand="full">
+                    <ion-button
+                        mode="md"
+                        color="var(--blue-color)"
+                        (click)="signUp()"
+                        expand="full"
+                    >
                         Create Account
                     </ion-button>
                 </div>
                 <div class="footer ion-text-center">
-                    <p>Already have an account ? <span [routerLink]="['/login']">Login</span></p>
+                    <p>
+                        Already have an account ?
+                        <span [routerLink]="['/login']">Login</span>
+                    </p>
                 </div>
             </div>
         </div>
