@@ -9,13 +9,13 @@
     </ion-toolbar>
 </ion-header>
 
+<!-- *ngIf="addressDiv.length > 0" -->
 <ion-content>
     <div class="ion-padding-start ion-padding-end header-section">
         <p class="title">
             Add Address
             <span
                 class="ion-float-right"
-                *ngIf="addressDiv.length > 0"
                 (click)="manageAddress()"
                 >Select From Saved Address</span
             >

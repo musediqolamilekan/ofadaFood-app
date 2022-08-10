@@ -3,6 +3,7 @@ import { NavigationExtras } from "@angular/router";
 import { IonSlides } from "@ionic/angular";
 import { ApiService } from "src/app/api.service";
 import { UtilService } from "src/app/util.service";
+import { Router } from '@angular/router';
 
 @Component({
     selector: "app-home",
@@ -15,7 +16,7 @@ export class HomePage {
     services: any = [];
     data: any = [];
     token: string = "";
-    constructor(private api: ApiService, private util: UtilService) {}
+    constructor(private api: ApiService, private util: UtilService, private router:Router,) {}
 
     ionViewDidLoad() {}
 
@@ -183,6 +184,13 @@ export class HomePage {
     ionViewDidEnter() {}
 
     ionViewWillEnter() {
+        let token = localStorage.getItem("token")
+            ? localStorage.getItem("token")
+            : "";
+        if(token == ""){
+            this.router.navigate(['/login'])
+        }
+
         this.cartData = JSON.parse(localStorage.getItem("cart-data"));
         this.util.startLoad();
         // localStorage.removeItem("address-id");

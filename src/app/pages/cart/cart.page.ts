@@ -186,7 +186,7 @@ export class CartPage implements OnInit {
                 this.api.qty += element.qty;
             });
         });
-        this.allOrders.length > 0 && this.tot == 0
+        this.allOrders?.length > 0 && this.tot == 0
             ? (this.tot = JSON.parse(localStorage.getItem("totalAmount")))
             : this.tot;
 

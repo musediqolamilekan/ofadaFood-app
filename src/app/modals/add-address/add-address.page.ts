@@ -16,9 +16,10 @@ export class AddAddressPage implements OnInit {
   map: any;
   latt: number;
   long: number;
+  latlng: any;
   printAddress: any;
   addr1: string = "";
-  label: string = "";
+  label: string = "My address";
   err: any;
   locationCoords: any;
   constructor(
@@ -58,7 +59,10 @@ export class AddAddressPage implements OnInit {
           }
         },
         (err) => {
-          
+          alert(
+            "Error detecting: " + err
+          )
+          // localStorage.setItem("error", err)
         }
       );
   }
@@ -102,6 +106,21 @@ export class AddAddressPage implements OnInit {
       this.loadMap(result.coords.latitude, result.coords.longitude);
       this.latt = result.coords.latitude;
       this.long = result.coords.longitude;
+
+      // getting address from google
+      let latlng = new google.maps.LatLng(result.coords.latitude, result.coords.longitude);
+      let geocoder = new google.maps.Geocoder();
+      let mynewadd
+      geocoder.geocode({ 'latLng': latlng },  (results, status) =>{
+        if (status !== google.maps.GeocoderStatus.OK) {
+            alert("Error with map" + status);
+        }
+        // This is checking to see if the Geoeode Status is OK before proceeding
+        if (status == google.maps.GeocoderStatus.OK) {
+          mynewadd = results;
+            this.addr1 = (results[0].formatted_address);
+        }
+    });
       this.util.presentToast("Location Detected......");
       this.util.dismissLoader();
     });
@@ -117,7 +136,6 @@ export class AddAddressPage implements OnInit {
     this.geolocation.getCurrentPosition().then(result => {
       this.loadMap(result.coords.latitude, result.coords.longitude); 
       
-      
       this.latt = result.coords.latitude;
       this.long = result.coords.longitude;
       
@@ -127,6 +145,19 @@ export class AddAddressPage implements OnInit {
   }
   loadMap(lat, lng) {
     let latLng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
+    // getting address from google
+    let geocoder = new google.maps.Geocoder();
+    let mynewadd: any
+    geocoder.geocode({ 'latLng': latLng },  (results, status) =>{
+      if (status !== google.maps.GeocoderStatus.OK) {
+          alert("Error loading map: " + status);
+      }
+      // This is checking to see if the Geoeode Status is OK before proceeding
+      if (status == google.maps.GeocoderStatus.OK) {
+        mynewadd = results;
+          this.addr1 = (results[0].formatted_address);
+      }
+  });
     let mapOption = {
       center: latLng,
       zoom: 14,
@@ -142,6 +173,8 @@ export class AddAddressPage implements OnInit {
         animation: google.maps.Animation.DROP,
         position: this.map.getCenter()
       });
+      // this.addr1 = marker.get;
+      // this.label = "label";
     let content = `
           <div id="myId" class="item item-thumbnail-left item-text-wrap">
             <ion-item>
@@ -171,7 +204,15 @@ export class AddAddressPage implements OnInit {
         this.markerlatlong = marker.getPosition();    
         this.latt = marker.getPosition().lat(); 
         this.long = marker.getPosition().lng();
-      
+        marker.getPosition()
+
+
+
+        this.label = marker.getLabel()
+
+
+
+
        localStorage.setItem('marketLat',marker.getPosition().lat())
        localStorage.setItem('marketLng',marker.getPosition().lng())
         
