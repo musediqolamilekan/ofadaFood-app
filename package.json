@@ -105,8 +105,6 @@
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }
