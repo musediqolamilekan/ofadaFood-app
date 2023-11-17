@@ -24,13 +24,9 @@
             <div class="slide">
               <img src="{{l.imagePath + l.image}}" />
               <div class="dark-layer">
-                <p>{{l.title1}}</p>
-                <h3>
-                  Upto {{l.discount}}<span *ngIf="l.type == 'Percentage'"
-                    >%</span
-                  ><span *ngIf="l.type == 'Amount'">$</span>
-                </h3>
-                <h5>{{l.title2}}</h5>
+                <p><strong>{{l.title1}}</strong></p>
+
+                <h5><strong>{{l.title2}}</strong></h5>
               </div>
             </div>
           </ion-slide>
@@ -41,7 +37,7 @@
   <div *ngIf="services.length != 0" class="ion-padding-start ion-padding-end">
     <p class="label ion-margin-top">Food Categories</p>
   </div>
-  <div class="slider">
+  <div class="foodcat">
     <div
       class="slider_div"
       *ngFor="let s of services"

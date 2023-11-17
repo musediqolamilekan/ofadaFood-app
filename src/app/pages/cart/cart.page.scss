@@ -32,6 +32,23 @@ ion-content {
       padding-left: 10px;
     }
   }
+  .deliveryType {
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .delivery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .radio-label {
+    font-size: 12px;
+    font-family: proxi-bold;
+    margin-left: 5px;
+    line-height: 20px;
+  }
   .title {
     font-size: 15px;
     font-family: proxi-bold;

@@ -22,7 +22,7 @@
     </p>
     <img class="img" src="../../../assets/item/Path 3516.png" />
     <p class="ion-margin-top delivery">
-      Delivery Date: <span class="ion-float-right">{{date}}</span>
+      Delivery Type: <span class="ion-float-right">{{delivery_type}}</span>
     </p>
   </div>
 
@@ -64,6 +64,10 @@
     <p *ngIf="discount >= 0" class="item-text">
       Discount
       <span class="ion-float-right">{{currency_}}{{disPay}}</span>
+    </p>
+    <p class="item-text">
+      Pack(s) ({{noOfPacks}})
+      <span class="ion-float-right">{{packPrice}}</span>
     </p>
     <p class="item-text">
       Sub Total

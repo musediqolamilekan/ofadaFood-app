@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "makeapk": "ionic cordova build android"
   },
   "private": true,
   "dependencies": {
@@ -31,7 +32,6 @@
     "@ionic/angular": "^5.0.0",
     "@ng-select/ng-select": "^5.0.3",
     "angular4-paystack": "^3.0.2",
-    "com.razorpay.cordova": "1.4.12",
     "cordova-res": "^0.15.4",
     "ion-bottom-drawer": "^2.0.0",
     "ion2-calendar": "^3.0.0-rc.0",
@@ -53,10 +53,8 @@
     "@types/node": "^12.11.1",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.67.6",
-    "card.io.cordova.mobilesdk": "^2.1.0",
     "codelyzer": "^6.0.0",
-    "com.paypal.cordova.mobilesdk": "^3.5.0",
-    "cordova-android": "^5.0.0",
+    "cordova-android": "^12.0.1",
     "cordova-plugin-android-permissions": "^1.1.0",
     "cordova-plugin-androidx": "^3.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.3",
@@ -75,7 +73,6 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "onesignal-cordova-plugin": "^2.11.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
@@ -94,10 +91,7 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "onesignal-cordova-plugin": {},
       "cordova-plugin-geolocation": {},
-      "com.paypal.cordova.mobilesdk": {},
-      "com.razorpay.cordova": {},
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-request-location-accuracy": {
         "PLAY_SERVICES_LOCATION_VERSION": "16.+"

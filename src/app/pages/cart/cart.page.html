@@ -1,115 +1,125 @@
 <ion-header class="ion-no-border">
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button mode="md" defaultHref="/product-view" text="">
-                <ion-icon src="../../../assets/icon/login.svg"></ion-icon>
-            </ion-back-button>
-        </ion-buttons>
-        <ion-title mode="md">Cart</ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" defaultHref="/product-view" text="">
+        <ion-icon src="../../../assets/icon/login.svg"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title mode="md">Cart</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <!-- *ngIf="addressDiv.length > 0" -->
 <ion-content>
-    <div class="ion-padding-start ion-padding-end header-section">
-        <p class="title">
-            Add Address
-            <span
-                class="ion-float-right"
-                (click)="manageAddress()"
-                >Select From Saved Address</span
-            >
-        </p>
-        <ion-textarea
-            readonly="true"
-            value="{{address}}"
-            rows="4"
-            cols="30"
-            placeholder="Add your address"
-        ></ion-textarea>
-        <p class="future" (click)="addresss()">+ Add address</p>
+  <div class="ion-padding-start ion-padding-end header-section">
+    <p class="title">
+      Add Address
+      <span class="ion-float-right" (click)="manageAddress()"
+        >Select From Saved Address</span
+      >
+    </p>
+    <ion-textarea
+      readonly="true"
+      value="{{address}}"
+      rows="4"
+      cols="30"
+      placeholder="Add your address"
+    ></ion-textarea>
+    <p class="future" (click)="addresss()">+ Add address</p>
+  </div>
+  <img src="../../../assets/item/Path 3516.png" class="hr1" />
+  <div class="ion-padding-start ion-padding-end">
+    <p class="title ion-padding-start">Select Delivery Type</p>
+    <div class="deliveryType">
+      <div class="delivery">
+        <input checked name="deliverytype" id="delivery" type="radio" />
+        <label for="delivery">
+          <span class="radio-label">Delivery</span>
+        </label>
+      </div>
+      <div class="delivery">
+        <input name="deliverytype" id="pickup" type="radio" />
+        <label for="pickup">
+          <span class="radio-label">Pickup</span>
+        </label>
+      </div>
     </div>
-    <img src="../../../assets/item/Path 3516.png" class="hr1" />
-    <div class="ion-padding-start ion-padding-end">
-        <p class="title ion-padding-start">Select Expected Delivery Date</p>
-        <p class="date">
-            Expected Delivery Date
-            <span
-                class="ion-float-right"
-                (click)="presentModal()"
-                *ngIf="date == null"
-            >
-                {{today}}
-            </span>
-            <span
-                class="ion-float-right"
-                *ngIf="date != null"
-                (click)="presentModal()"
-            >
-                {{date}}
-            </span>
-        </p>
-    </div>
-    <img src="../../../assets/item/Path 3516.png" class="hr1" />
-    <div class="full-width">
-        <p class="item-heading ion-padding-start ion-padding-end">Your Items</p>
-        <p
-            (click)="clearCart()"
-            class="item-heading ion-padding-start ion-padding-end"
-        >
-            Clear Cart
-        </p>
-    </div>
+    <!-- <p class="date">
+      Expected Delivery Date
+      <span
+        class="ion-float-right"
+        (click)="presentModal()"
+        *ngIf="date == null"
+      >
+        {{today}}
+      </span>
+      <span
+        class="ion-float-right"
+        *ngIf="date != null"
+        (click)="presentModal()"
+      >
+        {{date}}
+      </span>
+    </p> -->
+  </div>
+  <img src="../../../assets/item/Path 3516.png" class="hr1" />
+  <div class="full-width">
+    <p class="item-heading ion-padding-start ion-padding-end">Your Items</p>
+    <p
+      (click)="clearCart()"
+      class="item-heading ion-padding-start ion-padding-end"
+    >
+      Clear Cart
+    </p>
+  </div>
 
-    <div class="cart-data">
-        <div
-            *ngIf="allOrders?.length > 0 && cartDataDisplay?.length < 1"
-            class="date ion-padding-start"
-        >
-            <p style="text-align: center">
-                your cart items are set for order, please click Continue.
-            </p>
-        </div>
-        <div *ngFor="let item of cartDataDisplay" class="padding">
-            <ion-item class="ion-no-padding" lines="none">
-                <img class="img" src="{{item.imagePath + item.image}}" />
-                <ion-label>
-                    <h3>{{item.name}}</h3>
-                    <p *ngFor="let i of item?.service">
-                        {{i?.type}} x{{i?.qty}}
-                        <span class="ion-float-right"
-                            >{{currency}}{{i?.total}}</span
-                        >
-                    </p>
-                </ion-label>
-            </ion-item>
-            <img src="../../../assets/item/Path 3516.png" class="hr" />
-        </div>
+  <div class="cart-data">
+    <div
+      *ngIf="allOrders?.length > 0 && cartDataDisplay?.length < 1"
+      class="date ion-padding-start"
+    >
+      <p style="text-align: center">
+        your cart items are set for order, please click Continue.
+      </p>
     </div>
+    <div *ngFor="let item of cartDataDisplay" class="padding">
+      <ion-item class="ion-no-padding" lines="none">
+        <img class="img" src="{{item.imagePath + item.image}}" />
+        <ion-label>
+          <h3>{{item.name}}</h3>
+          <p *ngFor="let i of item?.service">
+            {{i?.type}} x{{i?.qty}}
+            <span class="ion-float-right">{{currency}}{{i?.total}}</span>
+          </p>
+        </ion-label>
+      </ion-item>
+      <img src="../../../assets/item/Path 3516.png" class="hr" />
+    </div>
+  </div>
 </ion-content>
 <ion-footer class="ion-no-border">
-    <ion-toolbar>
-        <div class="full-width">
-            <p>
-                Total Bill :
-                <ion-text> {{currency}}{{tot}}</ion-text>
-            </p>
-            <div class="cart-buttons">
-                <ion-button
-                    (click)="setOrder()"
-                    slot="end"
-                    mode="md"
-                    color="var(--blue-color)"
-                    >Continue</ion-button
-                >
-                <!-- <ion-button
+  <ion-toolbar>
+    <div class="full-width">
+      <p>
+        Total Bill :
+        <ion-text> {{currency}}{{tot}}</ion-text>
+      </p>
+      <div class="cart-buttons">
+        <ion-button
+          (click)="setOrder()"
+          slot="end"
+          mode="md"
+          color="var(--blue-color)"
+          >Continue</ion-button
+        >
+        <!-- <ion-button
                     (click)="makePay()"
                     slot="end"
                     mode="md"
                     color="var(--blue-color)"
                     >Make Payment</ion-button
                 > -->
-            </div>
-        </div>
-    </ion-toolbar>
+      </div>
+    </div>
+  </ion-toolbar>
 </ion-footer>

@@ -29,7 +29,7 @@ export class AddAddressPage implements OnInit {
     private util: UtilService,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
-    private platform:Platform
+    private platform: Platform
   ) {
     this.locationCoords = {
       latitude: "",
@@ -40,10 +40,7 @@ export class AddAddressPage implements OnInit {
   }
   isAdd: boolean = true;
 
-  ngOnInit() {
-    
-  }
-
+  ngOnInit() {}
 
   detect() {
     this.androidPermissions
@@ -59,9 +56,7 @@ export class AddAddressPage implements OnInit {
           }
         },
         (err) => {
-          alert(
-            "Error detecting: " + err
-          )
+          alert("Error detecting: " + err);
           // localStorage.setItem("error", err)
         }
       );
@@ -79,9 +74,7 @@ export class AddAddressPage implements OnInit {
             () => {
               this.askToTurnOnGPS();
             },
-            (error) => {
-              
-            }
+            (error) => {}
           );
       }
     });
@@ -108,19 +101,22 @@ export class AddAddressPage implements OnInit {
       this.long = result.coords.longitude;
 
       // getting address from google
-      let latlng = new google.maps.LatLng(result.coords.latitude, result.coords.longitude);
+      let latlng = new google.maps.LatLng(
+        result.coords.latitude,
+        result.coords.longitude
+      );
       let geocoder = new google.maps.Geocoder();
-      let mynewadd
-      geocoder.geocode({ 'latLng': latlng },  (results, status) =>{
+      let mynewadd;
+      geocoder.geocode({ latLng: latlng }, (results, status) => {
         if (status !== google.maps.GeocoderStatus.OK) {
-            alert("Error with map" + status);
+          alert("Error with map" + status);
         }
         // This is checking to see if the Geoeode Status is OK before proceeding
         if (status == google.maps.GeocoderStatus.OK) {
           mynewadd = results;
-            this.addr1 = (results[0].formatted_address);
+          this.addr1 = results[0].formatted_address;
         }
-    });
+      });
       this.util.presentToast("Location Detected......");
       this.util.dismissLoader();
     });
@@ -128,115 +124,105 @@ export class AddAddressPage implements OnInit {
   ionViewWillEnter() {
     this.platform.ready().then(() => {
       this.initPage();
-    })
+    });
   }
   initPage() {
-
     this.util.startLoad();
-    this.geolocation.getCurrentPosition().then(result => {
-      this.loadMap(result.coords.latitude, result.coords.longitude); 
-      
+    this.geolocation.getCurrentPosition().then((result) => {
+      this.loadMap(result.coords.latitude, result.coords.longitude);
+
       this.latt = result.coords.latitude;
       this.long = result.coords.longitude;
-      
-      
     });
-    
   }
   loadMap(lat, lng) {
     let latLng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
     // getting address from google
     let geocoder = new google.maps.Geocoder();
-    let mynewadd: any
-    geocoder.geocode({ 'latLng': latLng },  (results, status) =>{
+    let mynewadd: any;
+    geocoder.geocode({ latLng: latLng }, (results, status) => {
       if (status !== google.maps.GeocoderStatus.OK) {
-          alert("Error loading map: " + status);
+        alert("Error loading map: " + status);
       }
       // This is checking to see if the Geoeode Status is OK before proceeding
       if (status == google.maps.GeocoderStatus.OK) {
         mynewadd = results;
-          this.addr1 = (results[0].formatted_address);
+        this.addr1 = results[0].formatted_address;
       }
-  });
+    });
     let mapOption = {
       center: latLng,
       zoom: 14,
-      mapTypeId: 'roadmap',
-      disableDefaultUI: true
-    }
-    let element = document.getElementById('map');
+      mapTypeId: "roadmap",
+      disableDefaultUI: true,
+    };
+    let element = document.getElementById("map");
     this.map = new google.maps.Map(element, mapOption);
-    let marker = new google.maps.Marker(
-      {
-        map: this.map,
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        position: this.map.getCenter()
-      });
-      // this.addr1 = marker.get;
-      // this.label = "label";
-    let content = `
+    let marker = new google.maps.Marker({
+      map: this.map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter(),
+    });
+    // this.addr1 = marker.get;
+    // this.label = "label";
+    let content =
+      `
           <div id="myId" class="item item-thumbnail-left item-text-wrap">
             <ion-item>
               <ion-row>
-                <h6> `+ marker.title + `</h6>
-                <h6> `+ marker.position + `</h6>
+                <h6> ` +
+      marker.title +
+      `</h6>
+                <h6> ` +
+      marker.position +
+      `</h6>
               </ion-row>
             </ion-item>
           </div>
-        `
+        `;
     this.addInfoWindow(marker, content);
     marker.setMap(this.map);
   }
   addInfoWindow(marker, content) {
-    
     {
-      let infoWindow = new google.maps.InfoWindow(
-        {
-          content: content
-        });
-      google.maps.event.addListener(marker, 'click', () => {
+      let infoWindow = new google.maps.InfoWindow({
+        content: content,
+      });
+      google.maps.event.addListener(marker, "click", () => {
         infoWindow.open(this.map, marker);
       });
       var geocoder = new google.maps.Geocoder();
 
-      google.maps.event.addListener(marker, 'dragend', function () {
-        this.markerlatlong = marker.getPosition();    
-        this.latt = marker.getPosition().lat(); 
+      google.maps.event.addListener(marker, "dragend", function () {
+        this.markerlatlong = marker.getPosition();
+        this.latt = marker.getPosition().lat();
         this.long = marker.getPosition().lng();
-        marker.getPosition()
+        marker.getPosition();
 
+        this.label = marker.getLabel();
 
+        localStorage.setItem("marketLat", marker.getPosition().lat());
+        localStorage.setItem("marketLng", marker.getPosition().lng());
 
-        this.label = marker.getLabel()
-
-
-
-
-       localStorage.setItem('marketLat',marker.getPosition().lat())
-       localStorage.setItem('marketLng',marker.getPosition().lng())
-        
-     
-        geocoder.geocode({
-          'latLng':  this.markerlatlong
-        }, function (results, status) {
-          if (status ==
-              google.maps.GeocoderStatus.OK) {
-              if (results[1]) {           
-                  
-                  this.zipcode = results[1].zipcode;
-              } else {  
+        geocoder.geocode(
+          {
+            latLng: this.markerlatlong,
+          },
+          function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (results[1]) {
+                this.zipcode = results[1].zipcode;
+              } else {
               }
-          } else {
-              
-             
+            } else {
+            }
           }
-      });
+        );
       });
     }
   }
   isAddAddress: boolean = true;
-
 
   addAddress() {
     this.util.startLoad();
@@ -245,16 +231,20 @@ export class AddAddressPage implements OnInit {
     let data = {
       addr1: this.addr1,
       label: this.label,
-      lat: localStorage.getItem('marketLat') ? localStorage.getItem('marketLat') : this.latt,
-      long: localStorage.getItem('marketLng') ? localStorage.getItem('marketLng') : this.long
+      lat: localStorage.getItem("marketLat")
+        ? localStorage.getItem("marketLat")
+        : this.latt,
+      long: localStorage.getItem("marketLng")
+        ? localStorage.getItem("marketLng")
+        : this.long,
     };
     this.api.postDataWithToken("add_address", data).subscribe(
       (success: any) => {
         if (success.success) {
-          this.util.presentToast("Address Adddd Succesfully");
-          localStorage.removeItem('markerLat');
-          localStorage.removeItem('markerLng');
-          localStorage.setItem('SelectAddress',this.addr1);
+          this.util.presentToast("Address Added Succesfully");
+          localStorage.removeItem("markerLat");
+          localStorage.removeItem("markerLng");
+          localStorage.setItem("SelectAddress", this.addr1);
           this.isAdd = false;
           this.modal.dismiss(success.data);
           this.util.dismissLoader();
